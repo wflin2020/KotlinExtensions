@@ -1,2 +1,3 @@
 rootProject.name = "ktext"
 include ':app'
+include ':ktext'
