@@ -1,0 +1,89 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task generateJavadoc(type: Jar, dependsOn: dokkaJavadoc) {
+    group = 'jar'
+    archiveClassifier.set('javadoc')
+    from "$rootDir/javadoc"
+}
+
+ext["signing.keyId"] = ''
+ext["signing.password"] = ''
+ext["signing.secretKeyRingFile"] = ''
+ext["ossrhUsername"] = ''
+ext["ossrhPassword"] = ''
+
+File secretPropsFile = project.rootProject.file('local.properties')
+if (secretPropsFile.exists()) {
+    println "Found secret props file, loading props"
+    Properties p = new Properties()
+    p.load(new FileInputStream(secretPropsFile))
+    p.each { name, value ->
+        ext[name] = value
+    }
+} else {
+    println "No props file, loading env vars"
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId GROUP_ID
+            artifactId ARTIFACT_ID
+            version VERSION
+            pom {
+                name = 'ktext'
+                description = 'A library provides some useful kotlin extension functions.'
+                url = 'https://github.com/wflin2020/KotlinExtensions'
+                inceptionYear = '2021'
+
+                scm {
+                    url = 'https://github.com/wflin2020/KotlinExtensions'
+                    connection = 'scm:git@https://github.com/wflin2020/KotlinExtensions.git'
+                    developerConnection = 'scm:git@https://github.com/wflin2020/KotlinExtensions.git'
+                }
+
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution = 'repo'
+                        comments = 'A business-friendly OSS license'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'wflin2020'
+                        name = 'wflin'
+                        email = 'funcprintf@gmail.com'
+                        url = 'https://github.com/wflin2020/KotlinExtensions'
+                    }
+                }
+
+                issueManagement {
+                    system = 'Github'
+                    url = 'https://github.com/wflin2020/KotlinExtensions'
+                }
+            }
+
+            artifact './build/outputs/aar/ktext-release.aar'
+//            artifact generateJavadoc
+        }
+    }
+    repositories {
+        maven {
+            // 指定要上传的maven仓库
+            url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
+            //Maven仓库用户名和密码
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.maven //签名配置
+}
