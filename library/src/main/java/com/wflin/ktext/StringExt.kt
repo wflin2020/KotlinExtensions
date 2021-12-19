@@ -1,6 +1,9 @@
 package com.wflin.ktext
 
 import android.net.Uri
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Base64
 import java.io.File
 
@@ -25,3 +28,22 @@ fun String.assetFileUri(): Uri = Uri.parse("file:///android_asset/$this")
  * get file uri by file path
  */
 fun String.fileUri(): Uri = Uri.fromFile(File(this))
+
+/**
+ * set ForegroundColorSpan for String
+ */
+fun String.colorSpan(str: String, color: Int): SpannableString {
+    val span = SpannableString(this)
+    try {
+        val start = this.indexOf(str)
+        span.setSpan(
+            ForegroundColorSpan(color),
+            start,
+            start+str.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
+    return span
+}
