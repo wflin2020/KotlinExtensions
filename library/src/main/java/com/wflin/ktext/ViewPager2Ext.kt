@@ -24,3 +24,16 @@ fun ViewPager2.init(
 
     }
 }
+
+/**
+ * provide simpler access to set onPageScrollStateChanged listener
+ */
+fun ViewPager2.onPageScrollStateChanged(
+    block: (state: Int) -> Unit
+) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrollStateChanged(state: Int) {
+            block(state)
+        }
+    })
+}
