@@ -59,3 +59,16 @@ fun ViewPager2.onPageScrolled(
         }
     })
 }
+
+/**
+ * provide simpler access to set onPageSelected listener
+ */
+fun ViewPager2.onPageSelected(
+    block: (position: Int) -> Unit
+) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            block(position)
+        }
+    })
+}
