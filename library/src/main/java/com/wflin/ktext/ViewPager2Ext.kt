@@ -72,3 +72,30 @@ fun ViewPager2.onPageSelected(
         }
     })
 }
+
+/**
+ * provide simpler access to ViewPager2#registerOnPageChangeCallback
+ */
+fun ViewPager2.setPageChangeCallback(
+    onStateChanged: (state: Int) -> Unit = { _ -> },
+    onScrolled: (pos: Int, posOffset: Float, posOffsetPixels: Int) -> Unit = { _, _, _ -> },
+    onSelected: (position: Int) -> Unit = { _ -> }
+) {
+    registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrollStateChanged(state: Int) {
+            onStateChanged(state)
+        }
+
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+            onScrolled(position, positionOffset, positionOffsetPixels)
+        }
+
+        override fun onPageSelected(position: Int) {
+            onSelected(position)
+        }
+    })
+}
