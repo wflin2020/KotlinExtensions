@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.max
 
 /**
  * @author: wflin
@@ -98,4 +99,12 @@ fun ViewPager2.setPageChangeCallback(
             onSelected(position)
         }
     })
+}
+
+/**
+ * provide simpler access to back previous item
+ */
+fun ViewPager2.back(animate: Boolean = true) {
+    val pos = max(currentItem -1, 0)
+    setCurrentItem(pos, animate)
 }
