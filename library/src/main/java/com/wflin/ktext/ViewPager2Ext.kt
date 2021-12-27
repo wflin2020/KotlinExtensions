@@ -108,3 +108,10 @@ fun ViewPager2.back(animate: Boolean = true) {
     val pos = max(currentItem -1, 0)
     setCurrentItem(pos, animate)
 }
+
+/**
+ * provide simpler access to go to next item
+ */
+fun ViewPager2.next(animate: Boolean = true) {
+    setCurrentItem(currentItem + 1, animate)
+}
