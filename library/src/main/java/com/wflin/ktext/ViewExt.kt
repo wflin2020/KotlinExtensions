@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.SystemClock
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
 import androidx.annotation.UiThread
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.findViewTreeLifecycleOwner
@@ -182,3 +183,8 @@ fun View.postDelayByLifecycle(
         block()
     }
 }
+
+/**
+ * Like findViewById but with type interference, assume the view exists
+ */
+inline fun <reified T : View> View.find(@IdRes id: Int) : T = findViewById(id)
