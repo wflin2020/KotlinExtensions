@@ -1,6 +1,7 @@
 package com.wflin.ktext
 
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
@@ -47,6 +48,13 @@ fun TextView.bold() {
 fun TextView.deleteLine() {
     paint.flags = paint.flags or Paint.STRIKE_THRU_TEXT_FLAG
     paint.isAntiAlias = true
+}
+
+/**
+ * Extension method to set font for TextView.
+ */
+fun TextView.font(font: String) {
+    typeface = Typeface.createFromAsset(context.assets, "fonts/$font.ttf")
 }
 
 /**
