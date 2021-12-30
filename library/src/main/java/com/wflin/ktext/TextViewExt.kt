@@ -109,3 +109,10 @@ fun TextView.setClickSpan(
     }
 }
 
+/**
+ * Extension method to set a drawable to the left of TextView.
+ */
+fun TextView.setDrawableLeft(drawable: Int) {
+    this.setCompoundDrawablesWithIntrinsicBounds(drawable, 0, 0, 0)
+}
+
