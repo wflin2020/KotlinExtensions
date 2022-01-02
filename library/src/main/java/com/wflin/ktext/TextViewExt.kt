@@ -129,3 +129,10 @@ fun TextView.setDrawableRight(drawable: Int) {
 fun TextView.setDrawableTop(drawable: Int) {
     this.setCompoundDrawablesWithIntrinsicBounds(0, drawable, 0, 0)
 }
+
+/**
+ * Extension method to set a drawable to the bottom of TextView.
+ */
+fun TextView.setDrawableBottom(drawable: Int) {
+    this.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, drawable)
+}
