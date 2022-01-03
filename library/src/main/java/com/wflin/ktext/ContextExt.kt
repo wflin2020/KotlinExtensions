@@ -1,14 +1,18 @@
 package com.wflin.ktext
 
+import android.app.job.JobScheduler
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.JOB_SCHEDULER_SERVICE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.os.Build
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import java.lang.StringBuilder
 
@@ -123,3 +127,9 @@ fun Context.hasPermission(vararg permissions: String) =
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
 
+/**
+ * Extension method to get jobScheduler for Context.
+ */
+inline val Context.jobScheduler: JobScheduler?
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    get() = getSystemService(JOB_SCHEDULER_SERVICE) as? JobScheduler
