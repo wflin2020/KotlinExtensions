@@ -1,11 +1,9 @@
 package com.wflin.ktext
 
 import android.app.job.JobScheduler
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
+import android.content.*
 import android.content.Context.JOB_SCHEDULER_SERVICE
-import android.content.Intent
+import android.content.Intent.*
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
@@ -133,3 +131,19 @@ fun Context.hasPermission(vararg permissions: String) =
 inline val Context.jobScheduler: JobScheduler?
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     get() = getSystemService(JOB_SCHEDULER_SERVICE) as? JobScheduler
+
+/**
+ * Extension method to share for Context.
+ */
+fun Context.share(text: String, subject: String = ""): Boolean {
+    val intent = Intent()
+    intent.type = "text/plain"
+    intent.putExtra(EXTRA_SUBJECT, subject)
+    intent.putExtra(EXTRA_TEXT, text)
+    return try {
+        startActivity(createChooser(intent, null))
+        true
+    } catch (e: ActivityNotFoundException) {
+        false
+    }
+}
