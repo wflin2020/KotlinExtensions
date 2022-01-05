@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Build
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.BoolRes
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
@@ -147,3 +148,8 @@ fun Context.share(text: String, subject: String = ""): Boolean {
         false
     }
 }
+
+/**
+ * Extension method to Get Boolean resource for Context.
+ */
+fun Context.getBoolean(@BoolRes id: Int) = resources.getBoolean(id)
