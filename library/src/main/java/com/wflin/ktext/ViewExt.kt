@@ -174,9 +174,9 @@ fun View.click(block: () -> Unit, delay: Long = 600) {
  * provide safer access to {@link View#postDelay(Runnable action, long delayMillis)}
  */
 fun View.postDelayByLifecycle(
+    block: () -> Unit,
     delayMillis: Long,
-    dispatcher: CoroutineDispatcher = Dispatchers.Main,
-    block: () -> Unit
+    dispatcher: CoroutineDispatcher = Dispatchers.Main
 ): Job? = findViewTreeLifecycleOwner()?.let { lifecycleOwner ->
     lifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
         delay(delayMillis)
