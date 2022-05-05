@@ -1,6 +1,7 @@
 package com.wflin.ktext
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -13,8 +14,22 @@ import kotlin.math.max
  */
 
 fun ViewPager2.init(
+    activity: FragmentActivity,
+    fragmentList: MutableList<Fragment>,
+    isUserInputEnabled: Boolean = false
+) {
+    this.isUserInputEnabled = isUserInputEnabled
+    adapter = object : FragmentStateAdapter(activity) {
+        override fun getItemCount(): Int = fragmentList.size
+
+        override fun createFragment(position: Int): Fragment = fragmentList[position]
+
+    }
+}
+
+fun ViewPager2.init(
     fragment: Fragment,
-    fragmentList: ArrayList<Fragment>,
+    fragmentList: MutableList<Fragment>,
     isUserInputEnabled: Boolean = false
 ) {
     this.isUserInputEnabled = isUserInputEnabled
@@ -105,7 +120,7 @@ fun ViewPager2.setPageChangeCallback(
  * provide simpler access to back previous item
  */
 fun ViewPager2.back(animate: Boolean = true) {
-    val pos = max(currentItem -1, 0)
+    val pos = max(currentItem - 1, 0)
     setCurrentItem(pos, animate)
 }
 
