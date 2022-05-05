@@ -115,27 +115,31 @@ fun TextView.setClickSpan(
 /**
  * Extension method to set a drawable to the left of TextView.
  */
-fun TextView.setDrawableLeft(drawable: Int) {
-    this.setCompoundDrawablesWithIntrinsicBounds(drawable, 0, 0, 0)
+fun TextView.setDrawableLeft(drawable: Int, padding: Int = 0) {
+    compoundDrawablePadding = padding
+    setCompoundDrawablesWithIntrinsicBounds(drawable, 0, 0, 0)
 }
 
 /**
  * Extension method to set a drawable to the right of TextView.
  */
-fun TextView.setDrawableRight(drawable: Int) {
-    this.setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
+fun TextView.setDrawableRight(drawable: Int, padding: Int = 0) {
+    compoundDrawablePadding = padding
+    setCompoundDrawablesWithIntrinsicBounds(0, 0, drawable, 0)
 }
 
 /**
  * Extension method to set a drawable to the top of TextView.
  */
-fun TextView.setDrawableTop(drawable: Int) {
-    this.setCompoundDrawablesWithIntrinsicBounds(0, drawable, 0, 0)
+fun TextView.setDrawableTop(drawable: Int, padding: Int = 0) {
+    compoundDrawablePadding = padding
+    setCompoundDrawablesWithIntrinsicBounds(0, drawable, 0, 0)
 }
 
 /**
  * Extension method to set a drawable to the bottom of TextView.
  */
-fun TextView.setDrawableBottom(drawable: Int) {
-    this.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, drawable)
+fun TextView.setDrawableBottom(drawable: Int, padding: Int = 0) {
+    compoundDrawablePadding = padding
+    setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, drawable)
 }
