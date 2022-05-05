@@ -1,10 +1,12 @@
 package com.wflin.ktext
 
+import android.graphics.Color
 import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Base64
+import androidx.annotation.ColorInt
 import java.io.File
 
 /**
@@ -18,11 +20,6 @@ val String.decodeBase64: String
 
 val String.encodeBase64: String
     get() = Base64.encodeToString(this.toByteArray(Charsets.UTF_8), Base64.DEFAULT)
-
-/**
- * get asset file uri by file name
- */
-fun String.assetFileUri(): Uri = Uri.parse("file:///android_asset/$this")
 
 /**
  * get file uri by file path
@@ -39,7 +36,7 @@ fun String.colorSpan(str: String, color: Int): SpannableString {
         span.setSpan(
             ForegroundColorSpan(color),
             start,
-            start+str.length,
+            start + str.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
     } catch (ex: Exception) {
@@ -47,3 +44,45 @@ fun String.colorSpan(str: String, color: Int): SpannableString {
     }
     return span
 }
+
+/**
+ * provide simpler access to {@link Color#parseColor(String)}
+ */
+val String.asColor: Int
+    @ColorInt get() = Color.parseColor(this)
+
+/**
+ * provide safer access to {@link String#toInt()}
+ */
+fun String?.toIntSafe(defaultValue: Int = 0): Int =
+    this?.toIntOrNull() ?: defaultValue
+
+/**
+ * provide safer access to {@link String#toDouble()}
+ */
+fun String?.toDoubleSafe(defaultValue: Double = 0.0): Double =
+    this?.toDoubleOrNull() ?: defaultValue
+
+/**
+ * provide safer access to {@link String#toLong()}
+ */
+fun String?.toLongSafe(defaultValue: Long = 0L): Long =
+    this?.toLongOrNull() ?: defaultValue
+
+/**
+ * provide safer access to {@link String#toFloat()}
+ */
+fun String?.toFloatSafe(defaultValue: Float = 0f): Float =
+    this?.toFloatOrNull() ?: defaultValue
+
+/**
+ * provide safer access to {@link String#toShort()}
+ */
+fun String?.toShortSafe(defaultValue: Short = 0): Short =
+    this?.toShortOrNull() ?: defaultValue
+
+/**
+ * provide safer access to {@link String#toByte()}
+ */
+fun String?.toByteSafe(defaultValue: Byte = 0): Byte =
+    this?.toByteOrNull() ?: defaultValue
