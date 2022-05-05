@@ -154,6 +154,24 @@ fun View.setPaddingEnd(end: Int) =
 
 /**
  * preventing fast click on view
+ */
+fun View.click(block: () -> Unit) {
+    setOnClickListener(object : View.OnClickListener {
+        private var lastClickTime = 0L
+        private val delay = 600L
+
+        override fun onClick(v: View?) {
+            if (SystemClock.elapsedRealtime() - lastClickTime < delay) {
+                return
+            }
+            block()
+            lastClickTime = SystemClock.elapsedRealtime()
+        }
+    })
+}
+
+/**
+ * preventing fast click on view
  * @param delay: default delay time(600ms)
  */
 fun View.click(block: () -> Unit, delay: Long = 600) {
@@ -187,4 +205,4 @@ fun View.postDelayByLifecycle(
 /**
  * Like findViewById but with type interference, assume the view exists
  */
-inline fun <reified T : View> View.find(@IdRes id: Int) : T = findViewById(id)
+inline fun <reified T : View> View.find(@IdRes id: Int): T = findViewById(id)
