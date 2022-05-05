@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
@@ -104,6 +105,8 @@ fun TextView.setClickSpan(
             start + str.length,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
+        text = span
+        movementMethod = LinkMovementMethod.getInstance()
     } catch (ex: Exception) {
         ex.printStackTrace()
     }
