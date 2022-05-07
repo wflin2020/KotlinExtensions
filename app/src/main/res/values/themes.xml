@@ -12,5 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">#3c3c3c</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

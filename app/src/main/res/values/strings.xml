@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ktext</string>
+    <string name="launch">launch</string>
 </resources>
