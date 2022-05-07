@@ -131,22 +131,6 @@ inline val Context.jobScheduler: JobScheduler?
     get() = getSystemService(JOB_SCHEDULER_SERVICE) as? JobScheduler
 
 /**
- * Extension method to share for Context.
- */
-fun Context.share(text: String, subject: String = ""): Boolean {
-    val intent = Intent()
-    intent.type = "text/plain"
-    intent.putExtra(EXTRA_SUBJECT, subject)
-    intent.putExtra(EXTRA_TEXT, text)
-    return try {
-        startActivity(createChooser(intent, null))
-        true
-    } catch (e: ActivityNotFoundException) {
-        false
-    }
-}
-
-/**
  * Extension method to Get Boolean resource for Context.
  */
 fun Context.getBoolean(@BoolRes id: Int) = resources.getBoolean(id)
