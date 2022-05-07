@@ -12,7 +12,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.FontRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 
 /**
  * @author: wflin
@@ -54,8 +56,8 @@ fun TextView.deleteLine() {
 /**
  * Extension method to set font for TextView.
  */
-fun TextView.font(font: String) {
-    typeface = Typeface.createFromAsset(context.assets, "fonts/$font.ttf")
+fun TextView.font(@FontRes resId: Int) {
+    typeface = ResourcesCompat.getFont(context, resId)
 }
 
 /**
