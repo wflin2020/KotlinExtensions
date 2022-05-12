@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        val fragList = mutableListOf<Fragment>(ViewExtFragment())
+        val fragList = mutableListOf(ViewExtFragment(), StringExtFragment())
         // {@link ViewPager2Ext#init}, the same: ViewPager2.init(Fragment,MutableList<Fragment>, Boolean)
         binding.vp2.init(this, fragList)
         // back

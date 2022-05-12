@@ -23,4 +23,9 @@ dependencies {
 ```
 
 ### How to use
-See the [wiki][https://github.com/wflin2020/KotlinExtensions/wiki]
+* #### [wiki]
+* #### [sample]
+
+[wiki]:https://github.com/wflin2020/KotlinExtensions/wiki
+
+[sample]:https://github.com/wflin2020/KotlinExtensions/tree/master/app/src/main/java/com/wflin/ktextdemo
