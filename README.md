@@ -18,6 +18,9 @@ allprojects {
 And add a dependency code to your **module**'s `build.gradle` file.
 ```gradle
 dependencies {
-    implementation "io.github.wflin2020:ktext:0.0.2"
+    implementation "io.github.wflin2020:ktext:latest-version"
 }
 ```
+
+### How to use
+See the [wiki][https://github.com/wflin2020/KotlinExtensions/wiki]
